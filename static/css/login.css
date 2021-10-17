@@ -1,0 +1,93 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: #373B44;
+    background: -webkit-linear-gradient(to top, #4286f4, #373B44);
+    background: linear-gradient(to top, #4286f4, #373B44);
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.login-container {
+    position: absolute;
+    width: 350px;
+    background: rgba(60, 98, 136, 0.241);
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 2px 2px 5px #cecece;
+}
+
+.login-container img {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    margin-top: 20px;
+    box-shadow: 2px 2px 5px #cecece;
+    margin-bottom: 20px;
+}
+
+.login-container p {
+    font-size: 22px;
+    font-weight: 600;
+    color: azure;
+    letter-spacing: 2px;
+    margin-bottom: 20px;
+}
+
+.login-container .fields{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 25px 0;
+}
+
+.login-container .fields .data {
+    box-shadow: 2px 2px 5px #cecece;
+    margin: 15px auto;
+    border-radius: 15px;
+}
+
+.login-container .fields .data i {
+    color: #fff;
+    margin: 20px 5px 20px 20px;
+}
+
+.login-container .fields .data input {
+    outline: none;
+    border: none;
+    background: none;
+    font-size: 15px;
+    padding: 20px 20px 20px 5px;
+    color: #fff;
+}
+
+.login-container .login {
+    outline: none;
+    border: none;
+    cursor: pointer;
+    /* buscar*/
+    width: 50%;
+    font-size: 15px;
+    border-radius: 10px;
+    padding: 10px 5px;
+    margin: 20px auto;
+    background-color: #0719524f;
+    color: #fff;
+    font-weight: lighter;
+    box-shadow: 2px 2px 5px #cecece;
+
+}
+
+.login-container .login:hover {
+    background-color: #040d2c77;
+}

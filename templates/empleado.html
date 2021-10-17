@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/css/bootstrap/bootstrap.min.css">
+    <script src="../static/js/bootstrap.bundle.min.js"></script>
+    <!-- <link rel="stylesheet" href="../static/css/estilos.css"> -->
+    <script src="https://kit.fontawesome.com/591d6b1660.js" crossorigin="anonymous"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=PT+Sans&family=Poppins:wght@200&family=Roboto:wght@300&family=Ubuntu:wght@300&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{url_for('static',filename='css/empleado.css')}}">
+    <title>Inicio</title>
+</head>
+<body>
+    <!-- Encabezado -->
+    <header>
+        <div class="titulo">
+            <h1>Empleado</h1>
+        </div>
+        <!-- Imagen de perfil -->
+        <img src="{{url_for('static',filename='img/foto.jpeg')}}" title="Alejandro Valencia">
+     </header>
+
+    <!-- Contenedor -->
+     <div class="contenedor">
+         <!-- Estadisticas de puntuaciones -->
+        <div class="info-mensual">
+            <div class="puntos">
+                <div class="ranking">
+                    <p>Ranking obtenido</p>
+                    <p>24 / 100</p> 
+                </div>
+                <div class="grafico">
+                    <img src="{{url_for('static',filename='img/grafico.PNG')}}" alt="">
+                </div>
+            </div>
+            <!-- Retroalimentación -->
+            <div class="retroalimentacion">
+                <h2>Retroalimentación</h2>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga fugiat dicta est sunt, optio doloribus ad soluta eaque, reiciendis rerum quo ratione dolore ipsum adipisci expedita neque aliquid suscipit praesentium!. Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga fugiat dicta est sunt, optio doloribus ad soluta eaque, reiciendis rerum quo ratione dolore ipsum adipisci expedita neque aliquid suscipit praesentium!.Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga fugiat dicta est sunt, optio doloribus ad soluta eaque, reiciendis rerum quo ratione dolore ipsum adipisci expedita neque aliquid suscipit praesentium!
+                </p>
+            </div>
+        </div>
+        <!-- Información sobre el empleado -->
+        <div class="info">
+            <div class="perfil">
+                <!-- Foto del empleado -->
+                <img src="../static/img/foto.jpeg" alt="">
+                <p>Alejandro Valencia</p>
+            </div>
+            <div class="datos">
+                <p>C.C:10047673</p>
+                <p>Tel: 3004604190</p>
+                <p>Email: aval13@uninorte.edu.co</p>
+                <p>Fecha de ingreso: 10/12/2014</p>
+                <p>Salario: 12.000.000</p>
+                <p>Cargo: Analista</p>
+            </div>
+            <!-- Puntuación recibida -->
+            <div class="puntuacion">
+                <p class="puntos">80</p>
+                <p>Puntos</p>
+            </div>
+        </div>
+    </div>
+    <!-- Footer -->
+    <footer>
+        <div class="enlaces">
+            <a href="#">Política de privacidad</a>
+            <span>-</span>
+            <a href="#">Política de cookies</a>
+        </div>
+        <!-- Iconos -->
+        <div class="iconos">
+            <i class="fab fa-facebook-square" title="Facebook"></i>
+            <i class="fab fa-linkedin" title="Linkedin"></i>
+            <i class="fab fa-youtube" title="Youtube"></i>
+            <i class="fab fa-twitter" title="Twitter"></i>
+            <i class="fab fa-instagram" title="Instagram"></i>
+        </div>
+    </footer>
+</body>
+</html>

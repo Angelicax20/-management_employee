@@ -1,0 +1,151 @@
+:root {
+    --colorFondo1: #1e3267;
+    --colorFondo2: #f4f1fa;
+    --colorFuente1: #d8d8d8;
+    --colorFuente2: #707070;
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'PT Sans', sans-serif;
+}
+
+body {
+    background-color: var(--colorFondo2);
+}
+
+
+/*----------- Encabezado -----------*/
+header{
+    width: 100%;
+    height: 56px;
+    background: var(--colorFondo1);
+    padding: 8px;
+    text-align: center;
+}
+header .titulo{
+    height: 100%;
+    display: inline-flex;
+    align-items: center;
+    margin: auto;
+}
+header .titulo h1{
+    color: #fff;
+    font-weight: bold;
+    font-size: 16px;
+}
+header img{
+    width: 40px;
+    height: 40px;
+    border-radius: 100%;
+    float: right;
+    cursor: pointer;
+}
+/* ------Contenedor-------- */
+.contenedor{
+    width: 90%;
+    max-width: 1200px;
+    margin: auto;
+    background: var(--colorFondo2);
+    padding: 20px;
+    height: 86vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+/* -------Contenedor de los graficos y retroalimentación --------*/
+.contenedor .info-mensual{
+    width: 68%;
+    background: #fff;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #4d4d4f;
+}
+.contenedor .info-mensual .puntos{
+    display: flex;
+    flex-direction: column;
+    padding: 15px;
+    border-bottom: 1px solid #66676c;
+}
+.contenedor .info-mensual .ranking{
+    align-self: flex-end;
+}
+.contenedor .info-mensual .ranking p{
+    font-family: 'Segoe UI';
+    color:  #4d4d4f ;
+    font-weight: bold;
+}
+.contenedor .info-mensual .grafico {
+    align-self: center;
+    height: 300px;
+}
+.contenedor .info-mensual .grafico img{
+    width: 100%;
+    height: 100%;
+}
+.contenedor .info-mensual .retroalimentacion{
+    padding: 15px;
+    color: #66676c;
+}
+.contenedor .info-mensual .retroalimentacion h2{
+    font-weight: normal;
+    color:  #4d4d4f;
+    margin-bottom: 10px;
+}
+/*-----Contenedor de la informacion del usuario-------*/
+.contenedor .info{
+    width: 28%;
+    background: #fff;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #4d4d4f;
+    padding: 15px;
+}
+.contenedor .info .perfil{
+    text-align: center;
+}
+.contenedor .info .perfil img{
+    width: 200px;
+    height: 200px;
+    border-radius: 100%;
+}
+.contenedor .info .perfil p{
+    color:  #4d4d4f ;
+    font-size: 20px;
+    margin: 10px 0 30px;
+}
+.contenedor .info .datos p{
+    margin-bottom: 10px;
+    color:  #4d4d4f;
+}
+.contenedor .info .puntuacion{
+    margin-top: 20px;
+    text-align: center;
+}
+.contenedor .info .puntuacion .puntos{
+    font-size: 50px;
+}
+/* -----Footer-------- */
+footer{
+    background: var(--colorFondo1);
+    text-align: center;
+    padding: 8px;
+}
+footer .enlaces{
+    margin-bottom: 5px;
+}
+footer .enlaces a{
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 14px;
+}
+footer .enlaces span{
+    color: #fff;
+    font-weight: bold;
+}
+footer .iconos i{
+    font-size: 20px;
+}

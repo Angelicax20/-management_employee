@@ -1,0 +1,116 @@
+{% extends 'index.html' %}
+{% block cuerpo %}
+
+    <div class="contenido">
+        <div class="formAdmin">
+            <form action="">
+                <div class="contenido-form">
+                    <div class="secctionForm">
+                        <div class="elementImg">
+                            <img src="{{url_for('static',filename='img/foto.jpeg')}}" alt="">
+                        </div>
+                        
+                        <div class="elements">
+                            <div class="element">
+                                <input required type="text">
+                                <label for="">Nombre</label>
+                            </div>
+    
+                            <div class="element">
+                                <input required type="text">
+                                <label for="">Apellidos</label>
+                            </div>
+    
+                            <div class="element">
+                                <input required type="date">
+                                <label for="">Fecha de nacimiento</label>
+                            </div>
+    
+                            <div class="element">
+                                <input required type="number">
+                                <label for="">Número de documento</label>
+                            </div>
+    
+                            <div class="element">
+                                <select id="" required>
+                                    <option value=""></option>
+                                    <option value="1">Cedula de ciudadanía</option>
+                                    <option value="2">Tarjeta de identidad</option>
+                                    <option value="3">Pasaporte</option>
+                                </select>
+                                <label for="">Tipo  de documento</label>
+                            </div>
+    
+                            <div class="element">
+                                <input required type="password">
+                                <label for="">Contraseña</label>
+                            </div>
+                        </div>
+                    </div>  
+
+                    <div class="secctionForm">
+                        <div class="element">
+                            <input required type="tel">
+                            <label for="">Teléfono</label>
+                        </div>
+
+                        <div class="element">
+                            <input required type="email">
+                            <label for="">Email</label>
+                        </div>
+
+                        <div class="element">
+                            <input required type="text">
+                            <label for="">Dependencia</label>
+                        </div>
+
+                        <div class="element">
+                            <input required type="number">
+                            <label for="">Salario</label>
+                        </div>
+
+                        <div class="element">
+                            <select id="" required>
+                                <option value=""></option>
+                                <option value="terminoFijo">Termino fijo</option>
+                                <option value="terminoIndefinido">Termino indefinido</option>
+                                <option value="obraLabor">Obra o labor</option>
+                                <option value="aprendizaje">Aprendizaje</option>
+                                <option value="tempOcsAcc">Temporal, ocasional o accidental</option>
+                                <option value="ops">Prestación de servicios</option>
+                            </select>
+                            <label for="">Tipo  de contrato</label>
+                        </div>
+
+                        <div class="element">
+                            <input required type="date">
+                            <label for="">Fecha termino de contrato</label>
+                        </div>
+
+                        <div class="element">
+                            <input required type="date">
+                            <label for="">Fecha de ingreso</label>
+                        </div>
+                        
+                        <div class="element">
+                            <input required type="text">
+                            <label for="">Cargo</label>
+                        </div>
+
+                        <div class="element">
+                            <select id="" required>
+                                <option value=""></option>
+                                <option value="admin">Administrador</option>
+                                <option value="empleado">Empleado</option>
+                            </select>
+                            <label for="">Tipo  de usuario</label>
+                        </div>
+
+                        <input type="submit" value="Ingresar">
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+{% endblock %}

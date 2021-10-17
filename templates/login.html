@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{url_for('static',filename='css/login.css')}}">
+    <script src="https://kit.fontawesome.com/4c6ac28fa3.js" crossorigin="anonymous"></script>
+    <title>Login</title>
+</head>
+
+<body>
+    <div class="login-container">
+        <img src="{{url_for('static',filename='img/login.png')}}" alt="" srcset="">
+        <p>Nombre empresa</p>
+
+        <div class="fields">
+
+            <div class="data">
+                <i class="fas fa-user"></i>
+                <input type="Username" placeholder="Usuario">
+            </div>
+
+            <div class="data">
+                <i class="fas fa-lock"></i>
+                <input type="Password" placeholder="Contraseña">
+            </div>
+            
+            <button class="login">Ingresar</button>
+        </div>
+    </div>
+
+</body>
+
+</html>
