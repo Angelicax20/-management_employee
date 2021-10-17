@@ -1,0 +1,404 @@
+:root {
+    --colorFondo1: #1e3267;
+    --colorFondo2: #f4f1fa;
+    --colorFuente1: #d8d8d8;
+    --colorFuente2: #707070;
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'PT Sans', sans-serif;
+}
+
+body {
+    display: flex;
+    position: relative;
+}
+
+.menu-lateral {
+    background: var(--colorFondo1);
+    width: 13%;
+    height: 100vh;
+    border-right: 1px solid var(--colorFuente1);
+    padding: 30px 20px;
+}
+
+.menu-lateral nav ul {
+    list-style-type: none;
+    text-align: center;
+    font-size: 15px;
+    padding: 0px;
+}
+
+.menu-lateral nav ul li {
+    margin-bottom: 30px;
+    border-bottom: 1px solid var(--colorFondo2);
+    padding: 8px;
+}
+
+.menu-lateral nav ul li a {
+    color: var(--colorFuente1);
+    text-decoration: none;
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+}
+
+.menu-lateral nav ul li a:hover {
+    color: #ffffff;
+}
+
+.contenedor {
+    width: 87%;
+}
+
+.contenedor header {
+    background: var(--colorFondo1);
+    padding: 10px 5px;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    font-family: 'Poppins', sans-serif;
+}
+
+.contenedor header .imgUser {
+    width: 10%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.contenedor header .imgUser .box {
+    width: 60px;
+}
+
+.contenedor header .imgUser img {
+    width: 100%;
+    height: auto;
+    border-radius: 50%;
+}
+
+@supports(object-fit: cover) {
+    .contenedor header .imgUser img {
+        height: 100%;
+        object-fit: cover;
+        object-position: center center;
+    }
+}
+
+.contenedor header .elementos {
+    width: 90%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.contenedor header .elementos h1 {
+    display: inline-block;
+    color: #fff;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.contenedor header .elementos img {
+    width: 40px;
+    height: 40px;
+    background: #000;
+    border-radius: 100%;
+    cursor: pointer;
+}
+
+.contenedor .main {
+    height: 86vh;
+    background-color: var(--colorFondo2);
+}
+
+.contenedor footer {
+    background: var(--colorFondo1);
+    text-align: center;
+    padding: 8px;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    width: 87%;
+}
+
+.contenedor footer .enlaces {
+    margin-bottom: 5px;
+}
+
+.contenedor footer .enlaces a {
+    color: var(--colorFuente1);
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 14px;
+    font-family: 'Poppins', sans-serif;
+}
+
+.contenedor footer .enlaces span {
+    color: #fff;
+    font-weight: bold;
+}
+
+.contenedor footer .iconos i {
+    font-size: 20px;
+}
+
+
+/*contenido*/
+.contenido{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.contenido .formAdmin{
+    width: 80%;
+    background-color: #ffffff;
+    border-radius: 5px;
+    border: 1px solid #9b9b9b;
+    padding: 20px;
+}
+
+.contenido .formAdmin form{
+    display: flex;
+    flex-direction: column;
+}
+
+
+.contenido .formAdmin form .contenido-form{
+    padding: 20px 10px;
+}
+
+
+.contenido .formAdmin form .secctionForm,
+.contenido .formAdmin form .elements{
+    display: flex;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    position: relative;
+}
+
+.contenido .formAdmin form .secctionForm{
+    margin: 5px auto;
+}
+
+
+form .elementImg {
+    width: 18%;
+    margin: 10px;
+}
+
+form .elementImg img{
+    width: 100%;
+    border-radius: 50%;
+}
+
+form .elements{
+    width: 78%;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+form .element{
+    width: 21%;
+    margin: 35px 15px;
+    position: relative;
+}
+
+form .elements .element{
+    width: 27%;
+}
+
+form .element input,
+form .element select{
+    border: none;
+    padding: 5px;
+    border-bottom: 1px solid var(--colorFuente2);
+    outline: none;
+    color: var(--colorFuente2);
+    width: 100%;
+}
+
+form .element label{
+    position: absolute;
+    top: 8px;
+    left: 10px;
+    transition: all 0.5s ease-in-out;
+    user-select: none;
+    font-size: 14px;
+    pointer-events: none;
+    color: var(--colorFuente2);
+}
+
+
+form .element input:valid ~ label,
+form .element select:valid ~label,
+form .element input:focus ~ label,
+form .element select:focus ~label{
+    top: -15px;
+    left: -5px;
+    font-size: 12px;
+    color: var(--colorFondo1);
+}
+
+
+form .element input[type="date"] ~ label{
+    top: -15px;
+    left: -5px;
+    font-size: 12px;
+    color: var(--colorFondo1);
+}
+
+
+.contenido .formAdmin form input[type="submit"]{
+    position: absolute;
+    bottom: -20px;
+    left: 0;
+    border: none;
+    border-radius: 5px;
+    width: 200px;
+    padding: 8px 13px;
+    color: #ffffff;
+    cursor:  pointer;
+    transition: all 0.5s ease-in-out;
+    background-color: var(--colorFondo1);
+}
+
+.contenido .formAdmin form input[type="submit"]:hover{
+    background-color: #182854;
+}
+
+
+/* empleador */
+
+/* -------Contenedor de los graficos y retroalimentación --------*/
+.info-mensual{
+    width: 68%;
+    background: #fff;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #4d4d4f;
+}
+.info-mensual .puntos{
+    display: flex;
+    flex-direction: column;
+    padding: 15px;
+    border-bottom: 1px solid #66676c;
+}
+.info-mensual .ranking{
+    align-self: flex-end;
+}
+.info-mensual .ranking p{
+    font-family: 'Segoe UI';
+    color:  #4d4d4f ;
+    font-weight: bold;
+}
+.info-mensual .grafico {
+    align-self: center;
+    height: 300px;
+}
+.info-mensual .grafico img{
+    width: 100%;
+    height: 100%;
+}
+.info-mensual .retroalimentacion{
+    padding: 15px;
+    color: #66676c;
+}
+.info-mensual .retroalimentacion h2{
+    font-weight: normal;
+    color:  #4d4d4f;
+    margin-bottom: 10px;
+}
+/*----de la informacion del usuario-------*/
+.info{
+    width: 28%;
+    background: #fff;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #4d4d4f;
+    padding: 15px;
+}
+.info .perfil{
+    text-align: center;
+}
+.info .perfil img{
+    width: 200px;
+    height: 200px;
+    border-radius: 100%;
+}
+.info .perfil p{
+    color:  #4d4d4f ;
+    font-size: 20px;
+    margin: 10px 0 30px;
+}
+.info .datos p{
+    margin-bottom: 10px;
+    color:  #4d4d4f;
+}
+.info .puntuacion{
+    margin-top: 20px;
+    text-align: center;
+}
+.info .puntuacion .puntos{
+    font-size: 50px;
+}
+
+.gestionUsuarios{
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.gestionUsuarios .contenedorTable{
+    background-color: #ffffff;
+    padding: 35px;
+    border-radius: 5px;
+    border: 1px solid #e1e1e1;
+    width: 65%;
+}
+
+.gestionUsuarios .contenedorTable table{
+    width: 100%;
+}
+
+.gestionUsuarios .contenedorTable table th{
+    color: var(--colorFondo1);
+    font-family: 'Ubuntu', sans-serif;
+}
+
+.gestionUsuarios .contenedorTable table td{
+    font-size: 13px;
+    padding: 20px 10px;
+    border-bottom: 1px solid var(--colorFuente2);
+}
+
+
+
+.gestionUsuarios .contenedorTable table .acciones{
+    display: flex;
+    justify-content: space-evenly
+}
+
+.gestionUsuarios .contenedorTable table .acciones button,
+.gestionUsuarios .contenedorTable table .acciones a{
+    border: none;
+    background-color: #2681d6;
+    border-radius: 3px;
+    padding: 4px 10px;
+}
+
+.gestionUsuarios .contenedorTable table .acciones i{
+    pointer-events: none;
+    user-select: none;
+    color: #fff;
+}
+
+.gestionUsuarios .contenedorTable table .acciones button.delete{
+    background-color: #b81313;
+}
