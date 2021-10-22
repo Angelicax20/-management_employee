@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta charset="utf-8">
+		<title>Gestion Empleados | Ingreso</title>
+		<link rel="stylesheet" href="{{url_for('static',filename='css/login_style.css')}}">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css">
+		
+	</head>
+	<body>
+		<!--form area start-->
+		<div class="form">
+			<!--login form start-->
+			<form class="login-form" action="" method="post">
+				<i class="fas fa-user-circle"></i>
+				{{prueba.usu(class_="user-input",placeholder="Usuario")}}
+				<!-- <input class="user-input" type="text" name="" placeholder="Usuario" required> -->
+				{{prueba.cla(class_="user-input",placeholder="Contraseña")}}
+				<!-- <input class="user-input" type="password" name="" placeholder="Contraseña" required> -->
+				{{prueba.btn(class_="btn")}}
+				<!-- <input class="btn" type="submit" name="" value="Ingresar"> -->
+			</form>
+			<!--login form end-->
+		</div>
+		<!--form area end-->
+	</body>
+</html>

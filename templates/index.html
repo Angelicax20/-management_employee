@@ -1,15 +1,73 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="stylesheet" href="../static/css/bootstrap/bootstrap.min.css">
+    <script src="../static/js/bootstrap.bundle.min.js"></script>
+    <!-- <link rel="stylesheet" href="../static/css/estilos.css"> -->
+    <script src="https://kit.fontawesome.com/591d6b1660.js" crossorigin="anonymous"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=PT+Sans&family=Poppins:wght@200&family=Roboto:wght@300&family=Ubuntu:wght@300&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{url_for('static',filename='css/estilos.css')}}">
+    {% if titulo %}
+    <title>{{ titulo }}</title>
+    {% else %}
+    <title>Inicio</title>
+    {% endif %}
 </head>
 
 <body>
-    <h1>hola mundo</h1>
+
+    <div class="menu-lateral">
+        <nav>
+            <ul>
+                <li><a href="/index/">Inicio</a></li>
+                <li><a href="/crear-usuario/">Crear usuario</a></li>
+                <li><a href="/gestionar-usuario/">Gestionar usuario</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <div class="contenedor">
+        <header>
+            <div class="elementos">
+                {% if titulo %}
+                <h1>{{titulo}}</h1>
+                {% else %}
+                <h1>Inicio</h1>
+                {% endif %}
+            </div>
+            <div class="imgUser">
+                <div class="box">
+                    <img src="{{url_for('static',filename='img/foto.jpeg')}}" alt="">
+                </div>
+            </div>
+        </header>
+
+        <main class="main">
+            {% block cuerpo %}{% endblock %}
+        </main>
+
+        <footer>
+            <div class="enlaces">
+                <a href="#">Política de privacidad</a>
+                <span>-</span>
+                <a href="#">Política de cookies</a>
+            </div>
+            <div class="iconos">
+                <i class="fab fa-facebook-square" title="Facebook"></i>
+                <i class="fab fa-linkedin" title="Linkedin"></i>
+                <i class="fab fa-youtube" title="Youtube"></i>
+                <i class="fab fa-twitter" title="Twitter"></i>
+                <i class="fab fa-instagram" title="Instagram"></i>
+            </div>
+        </footer>
+    </div>
+
 </body>
 
 </html>
