@@ -60,6 +60,7 @@ body {
     align-items: center;
     overflow: hidden;
     font-family: 'Poppins', sans-serif;
+    z-index: 100;
 }
 
 .contenedor header .imgUser {
@@ -110,7 +111,10 @@ body {
 }
 
 .contenedor .main {
-    height: 86vh;
+    min-height: 86vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     background-color: var(--colorFondo2);
 }
 
@@ -255,13 +259,10 @@ form .element input[type="date"] ~ label{
 
 
 .contenido .formAdmin form input[type="submit"]{
-    position: absolute;
-    bottom: -20px;
-    left: 0;
     border: none;
     border-radius: 5px;
     width: 200px;
-    padding: 8px 13px;
+    padding: 8px 10px;
     color: #ffffff;
     cursor:  pointer;
     transition: all 0.5s ease-in-out;

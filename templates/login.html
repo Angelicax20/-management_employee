@@ -1,36 +1,29 @@
+
 <!DOCTYPE html>
-<html lang="es">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{url_for('static',filename='css/login.css')}}">
-    <script src="https://kit.fontawesome.com/4c6ac28fa3.js" crossorigin="anonymous"></script>
-    <title>Login</title>
-</head>
-
-<body>
-    <div class="login-container">
-        <img src="{{url_for('static',filename='img/login.png')}}" alt="" srcset="">
-        <p>Nombre empresa</p>
-
-        <div class="fields">
-
-            <div class="data">
-                <i class="fas fa-user"></i>
-                <input type="Username" placeholder="Usuario">
-            </div>
-
-            <div class="data">
-                <i class="fas fa-lock"></i>
-                <input type="Password" placeholder="Contraseña">
-            </div>
-            
-            <button class="login">Ingresar</button>
-        </div>
-    </div>
-
-</body>
-
+<html lang="en" dir="ltr">
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta charset="utf-8">
+		<title>Gestion Empleados | Ingreso</title>
+		<link rel="stylesheet" href="{{url_for('static',filename='css/login_style.css')}}">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css">
+		
+	</head>
+	<body>
+		<!--form area start-->
+		<div class="form">
+			<!--login form start-->
+			<form class="login-form" action="" method="post">
+				<i class="fas fa-user-circle"></i>
+				{{prueba.usu(class_="user-input",placeholder="Usuario")}}
+				<!-- <input class="user-input" type="text" name="" placeholder="Usuario" required> -->
+				{{prueba.cla(class_="user-input",placeholder="Contraseña")}}
+				<!-- <input class="user-input" type="password" name="" placeholder="Contraseña" required> -->
+				{{prueba.btn(class_="btn")}}
+				<!-- <input class="btn" type="submit" name="" value="Ingresar"> -->
+			</form>
+			<!--login form end-->
+		</div>
+		<!--form area end-->
+	</body>
 </html>

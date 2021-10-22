@@ -50,7 +50,7 @@ header img{
     margin: auto;
     background: var(--colorFondo2);
     padding: 20px;
-    height: 86vh;
+    min-height: 86vh;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -148,4 +148,4 @@ footer .enlaces span{
 }
 footer .iconos i{
     font-size: 20px;
-}
+  
