@@ -8,12 +8,18 @@ import os
 app = Flask(__name__)
 
 app.secret_key = os.urandom(24)
-
-@app.route('/')
-@app.route('/index/')
-@app.route('/home/')
+userlog = ""
+@app.route('/',methods=['GET', 'POST'])
+@app.route('/index/',methods=['GET', 'POST'])
+@app.route('/home/',methods=['GET', 'POST'])
 def home():
-    return render_template('index.html')
+    global userlog 
+    if request.method == 'GET' and  userlog=="":
+        return login()
+    else:
+        if userlog=="":
+            userlog=escape(request.form["usu"]) 
+        return render_template('index.html',usuario=userlog)
 
 
 
@@ -92,7 +98,8 @@ def login():
         frm_login = lg()
         return render_template('login.html',prueba=frm_login)
     else:
-        return home();
+        return render_template('index.html')
+        # return home();
     
 
 
