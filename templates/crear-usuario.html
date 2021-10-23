@@ -34,7 +34,7 @@
         
                                 <div class="element">
 
-                                    {{ prueba.tipoDoc(value = parametros['datosUsuario'][0][10])}}
+                                    {{ prueba.tipoDoc}}
                                     {{ prueba.tipoDoc.label}}
 
                                 </div>
@@ -101,7 +101,56 @@
                             {% endif %}
                             
                         </div>
-                    {% else %}
+                        <script>
+                            let tipodoc =document.querySelector("#tipoDoc");
+                            tipodoc.selectedIndex = "{{parametros['datosUsuario'][0][10]}}";
+                            let pass = document.querySelector("#clave");
+                            pass.value="{{parametros['datosUsuario'][0][9]}}";
+                            let tipousu= document.querySelector("#tipoUsuario");
+                            let ntu="{{parametros['datosUsuario'][0][14]}}";
+                            
+                            switch (ntu) {
+                                case "Administrador":
+                                    ntu=1;
+                                    break;
+                            
+                                default:
+                                    ntu=2;
+                                    break;
+                            }
+                            tipousu.selectedIndex = ntu;    
+                            
+                            let tipo_contrato=document.querySelector("#tipoContrato")
+                            
+                            let desctc="{{parametros['datosUsuario'][0][6]}}";
+                            let ntc=-1
+                            switch (desctc) {
+                                case "Termino fijo":
+                                    ntc=1;
+                                    break;
+                                case "Termino indefinido":
+                                    ntc=2;
+                                    break;
+                                case "Obra o labor":
+                                    ntc=3;
+                                    break;
+                                case "Aprendizaje":
+                                    ntc=4;
+                                    break;
+                                case "Temporal ocasional o accidental":
+                                    ntc=5;
+                                    break;
+                                case "Prestación de servicios":
+                                    ntc=6;
+                                    break;
+                                default:
+                                    ntc=-1;
+                                    break;
+                            }
+                            tipo_contrato.selectedIndex= ntc;
+                            // parametros['datosUsuario'][0][6]
+                        </script>
+                        {% else %}
                         <div class="secctionForm">
                             <div class="elementImg">
                                 <img src="{{url_for('static',filename='img/foto.jpeg')}}" alt="">
