@@ -30,7 +30,7 @@
                             <div class="acciones">
                                 <button title="Retroalimentar"><i class="fas fa-stream"></i></button>
                                 <a href="/crear-usuario/?idUsuario={{usuario[0]}}&accion=edicionUsuario" title="Editar"><i class="fas fa-edit"></i></a>
-                                <a href="/crear-usuario/" class="delete" title="Eliminar"><i class="fas fa-trash"></i></a>
+                                <button data-value="{{usuario[0]}}" id="btn{{usuario[0]}}" onclick="eliminarUsuario('btn{{usuario[0]}}')" class="delete" title="Eliminar"><i class="fas fa-trash"></i></button>
                             </div>
                         </td>
                     </tr>
@@ -84,10 +84,55 @@
                 },
                 "pageLength": 10
             });
+
+
+            let statusDelete = "{{parametros['estadoUpdate']}}";
+            console.log(statusDelete);
+
+            if (statusDelete == 'delete succes') {
+
+                Swal.fire({
+                    icon: "success",
+                    title: "Eliminación exitosa"
+                }).then((result) => {
+                    window.location.href = '/gestionar-usuario/';
+                })
+
+            } else if (statusDelete == 'delete error') {
+
+                Swal.fire({
+                    icon: "error",
+                    title: "Ha ocurrido un error, intenta nuevamente"
+                })
+
+            }
         }
 
         inicializarTable();
+        
     });
+
+    function eliminarUsuario(idEliminar){
+        let btnEliminar = document.querySelector('#'+idEliminar);
+
+        Swal.fire({
+            title: 'Desea eleiminar este usuario?',
+            text: "Estas realmente seguro?",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Si',
+            cancelButtonText: 'No'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                
+                let idUsuario = btnEliminar.getAttribute('data-value');
+                window.location.href = '/gestionar-usuario/?idUsuario='+idUsuario+'&accion=eliminarUsuario';
+
+            }
+        })
+    }
 </script>
 
 {% endblock %}

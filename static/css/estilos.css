@@ -51,11 +51,12 @@ body {
 
 .contenedor {
     width: 87%;
+    min-height: 100vh;
 }
 
 .contenedor header {
     background: var(--colorFondo1);
-    padding: 10px 5px;
+    padding: 13px 5px;
     display: flex;
     align-items: center;
     overflow: hidden;
@@ -111,7 +112,7 @@ body {
 }
 
 .contenedor .main {
-    min-height: 86vh;
+    min-height: 90vh;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -119,30 +120,26 @@ body {
 }
 
 .contenedor footer {
-    background: var(--colorFondo1);
     text-align: center;
-    padding: 8px;
     position: fixed;
     bottom: 0;
     right: 0;
-    width: 87%;
 }
 
-.contenedor footer .enlaces {
-    margin-bottom: 5px;
+.contenedor footer .enlaces{
+    margin: 0 20px;
 }
 
 .contenedor footer .enlaces a {
-    color: var(--colorFuente1);
     text-decoration: none;
     font-weight: bold;
-    font-size: 14px;
+    font-size: 13px;
+    color: #4d4d4f;
     font-family: 'Poppins', sans-serif;
 }
 
-.contenedor footer .enlaces span {
-    color: #fff;
-    font-weight: bold;
+.contenedor footer .enlaces a:hover{
+    color: #272727;
 }
 
 .contenedor footer .iconos i {

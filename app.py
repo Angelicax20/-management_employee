@@ -23,11 +23,14 @@ def home():
 
 
 
-accion = ''
+accionGlobal = ''
+idUsuario = ''
+
 
 @app.route('/crear-usuario/', methods=['GET', 'POST'])
 def crear_usuario():
-    global accion
+    global accionGlobal
+    global idUsuario
 
     """ V5. Utiliza almacenamiento seguro para los datos """
     frm = Registro()
@@ -37,27 +40,29 @@ def crear_usuario():
         'proceso' : '',
         'accion' : 'crear'
     }
-    
-    if request.args.get('accion'):
-        accion = 'editarUsuario'
-    else:
-        accion = 'CrearUsuario'
 
     if request.method == 'GET':
 
-        if accion == 'editarUsuario':
+        if request.args.get('accion') == 'edicionUsuario':
+            accionGlobal = 'editarUsuario'
+        else:
+            accionGlobal = 'CrearUsuario'
+
+        if accionGlobal == 'editarUsuario':
+            
             idUsuario = request.args.get('idUsuario')
+            
             sql = f"SELECT * FROM Usuario WHERE docIdentidad = '{idUsuario}';"
             resultadoUpdate = seleccion(sql)
-            
-            print(resultadoUpdate)
+
 
             parametrosURL['datosUsuario'] = resultadoUpdate
             parametrosURL['accion'] = 'editar'
+            
         return render_template('crear-usuario.html', prueba=frm, titulo='Registro de datos', parametros = parametrosURL)
 
     else:
-        
+
         nombres = escape(request.form['nombres'])
         apellidos = escape(request.form['apellidos'])
         fechaNacimiento = escape(request.form['fechaNacimiento'])
@@ -72,45 +77,76 @@ def crear_usuario():
         fechaIngreso = escape(request.form['fechaIngreso'])
         cargo = escape(request.form['cargo'])
         tipoUsuario = escape(request.form['tipoUsuario'])
+        
+        if accionGlobal == 'CrearUsuario':
+            sql = "INSERT INTO Usuario (docIdentidad,nombre,apellidos,fechaNac,telefono,correo,tipoContrato,fechaTerContrato,salario,clave, tipoDocumento, fechaIngreso, cargo, tipoUsuario) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?);"
+            # Ejecutar la consulta
+            clave = generate_password_hash(clave)
 
-        swerror = False
-        if nombres==None or len(nombres)==0:
-            flash('ERROR: Debe suministrar un nombre de usuario')
-            swerror = True
+            res = accion(sql, (numeroDocumento, nombres, apellidos, fechaNacimiento, telefono, email, tipoContrato, fechaTerminoContrato, salario, clave, tipoDoc, fechaIngreso, cargo, tipoUsuario))
+            # Proceso los resultados
 
-        if not swerror:
-            # Preparar el query -- Paramétrico
+            if res == 0:
+                parametrosURL['proceso'] = "insertado error"
+                parametrosURL['icon'] = "error"
+                parametrosURL['descripcion'] = "Intente insertar con otro numero de documento"
+            else:
+                parametrosURL['proceso'] = "insertado ok"
+                parametrosURL['icon'] = "success"
+                parametrosURL['descripcion'] = "Registro exitoso"
 
-            if accion == 'CrearUsuario':
-                sql = "INSERT INTO Usuario (docIdentidad,nombre,apellidos,fechaNac,telefono,correo,tipoContrato,fechaTerContrato,salario,clave, tipoDocumento, fechaIngreso, cargo, tipoUsuario) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?);"
-                # Ejecutar la consulta
-                clave = generate_password_hash(clave)
+        elif accionGlobal == 'editarUsuario': 
 
-                res = accion(sql, (numeroDocumento, nombres, apellidos, fechaNacimiento, telefono, email, tipoContrato, fechaTerminoContrato, salario, clave, tipoDoc, fechaIngreso, cargo, tipoUsuario))
-                # Proceso los resultados
+            sql = "UPDATE Usuario SET docIdentidad = ?, nombre = ?, apellidos = ?, fechaNac = ?, telefono = ?, correo = ?, tipoContrato = ?, fechaTerContrato = ?, salario = ?,  clave = ?, tipoDocumento = ?, fechaIngreso = ?, cargo = ?, tipoUsuario = ? WHERE docIdentidad = ?"
+            
+            clave = generate_password_hash(clave)
 
-                if res==0:
-                    parametrosURL['proceso'] = "insertado error"
-                    parametrosURL['icon'] = "error"
-                    parametrosURL['descripcion'] = "Intente insertar con otro numero de documento"
-                else:
-                    parametrosURL['proceso'] = "insertado ok"
-                    parametrosURL['icon'] = "success"
-                    parametrosURL['descripcion'] = "Registro exitoso"
+            res = accion(sql, (numeroDocumento, nombres, apellidos, fechaNacimiento, telefono, email, tipoContrato, fechaTerminoContrato, salario, clave, tipoDoc, fechaIngreso, cargo, tipoUsuario, idUsuario))
 
-            elif accion == 'editarUsuario':
-                pass
+            print("idUsuario vale:")
+            print(idUsuario)
+
+            if res == 0:
+                parametrosURL['proceso'] = "actualizado error"
+                parametrosURL['icon'] = "error"
+                parametrosURL['descripcion'] = "Intente actualizar con otro numero de documento"
+            else:
+                parametrosURL['proceso'] = "actualizado ok"
+                parametrosURL['icon'] = "success"
+                parametrosURL['descripcion'] = "Actualización exitosa"
+
+                idUsuario = ''
+
 
         return render_template('crear-usuario.html', prueba=frm, titulo='Registro de datos', parametros = parametrosURL)
 
 @app.route('/gestionar-usuario/', methods=['GET', 'POST'])
 def gestionar():
 
+    parametrosURL = {
+        'estadoUpdate' : 'noUpdate'
+    }
+
     if request.method == 'GET':
-        sql = f"SELECT * FROM Usuario;"
+
+
+        if request.args.get('accion') == 'eliminarUsuario':
+            idUsuario = request.args.get('idUsuario')
+
+            print(idUsuario)
+
+            sqlUpdate = "UPDATE Usuario SET estado = ? WHERE docIdentidad = ?"
+            res = accion(sqlUpdate, ('I',idUsuario))
+            
+            if res == 0:
+                parametrosURL['estadoUpdate'] = 'delete error'
+            else:
+                parametrosURL['estadoUpdate'] = 'delete succes'
+
+        sql = f"SELECT * FROM Usuario WHERE estado = 'A';"
         resultado = seleccion(sql)
 
-    return render_template('gestionar-usuario.html', titulo='Gestionar usuario', usuarios=resultado)
+    return render_template('gestionar-usuario.html', titulo='Gestionar usuario', usuarios=resultado, parametros = parametrosURL)
 
 
 @app.route('/empleado/')

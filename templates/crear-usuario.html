@@ -104,8 +104,8 @@
                         <script>
                             let tipodoc =document.querySelector("#tipoDoc");
                             tipodoc.selectedIndex = "{{parametros['datosUsuario'][0][10]}}";
-                            let pass = document.querySelector("#clave");
-                            pass.value="{{parametros['datosUsuario'][0][9]}}";
+                            //let pass = document.querySelector("#clave");
+                            //pass.value="{{parametros['datosUsuario'][0][9]}}";
                             let tipousu= document.querySelector("#tipoUsuario");
                             let ntu="{{parametros['datosUsuario'][0][14]}}";
                             
@@ -265,6 +265,10 @@
 
                     if (typeRequest == 'Registro exitoso') {
                         window.location.href = '/crear-usuario/';
+                    }
+
+                    if (typeRequest == 'Actualización exitosa'){
+                        window.location.href = '/gestionar-usuario/';
                     }
                 })
             })
