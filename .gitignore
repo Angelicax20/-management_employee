@@ -255,6 +255,7 @@ Temporary Items
 # Cython debug symbols
 
 ### VisualStudioCode ###
+.vscode
 .vscode/*
 !.vscode/settings.json
 !.vscode/tasks.json
