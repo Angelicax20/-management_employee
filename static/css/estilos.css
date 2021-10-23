@@ -1,3 +1,4 @@
+
 :root {
     --colorFondo1: #1e3267;
     --colorFondo2: #f4f1fa;
@@ -400,3 +401,4 @@ form .element input[type="date"] ~ label{
 .gestionUsuarios .contenedorTable table .acciones .delete{
     background-color: #b81313;
 }
+
