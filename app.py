@@ -1,3 +1,4 @@
+
 from flask import Flask, render_template, redirect, session, flash, request
 from markupsafe import escape
 from werkzeug.security import check_password_hash, generate_password_hash
@@ -131,4 +132,5 @@ def login():
 
 if __name__ == '__main__':
     app.run(debug=True)
+
 
