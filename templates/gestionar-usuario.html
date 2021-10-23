@@ -1,8 +1,8 @@
 {% extends 'index.html' %}
 {% block cuerpo %}
 
-<link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap4.min.css"/>
-<link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.5/css/responsive.bootstrap4.min.css"/>
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap4.min.css" />
+<link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.5/css/responsive.bootstrap4.min.css" />
 <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.6.2/css/buttons.bootstrap4.min.css" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.css" />
 
@@ -19,32 +19,23 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>Manuel Garcia</td>
-                    <td>1007597893</td>
-                    <td>Administrador</td>
-                    <td>3004604190</td>
-                    <td>
-                        <div class="acciones">
-                            <button title="Retroalimentar"><i class="fas fa-stream"></i></button>
-                            <a href="/crear-usuario/" title="Editar"><i class="fas fa-edit"></i></a>
-                            <button class="delete" title="Eliminar"><i class="fas fa-trash"></i></button>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Angelica Giraldo</td>
-                    <td>1085348707</td>
-                    <td>Administrador</td>
-                    <td>3136539574</td>
-                    <td>
-                        <div class="acciones">
-                            <button title="Retroalimentar"><i class="fas fa-stream"></i></button>
-                            <a href="/crear-usuario/" title="Editar"><i class="fas fa-edit"></i></a>
-                            <button class="delete" title="Eliminar"><i class="fas fa-trash"></i></button>
-                        </div>
-                    </td>
-                </tr>
+
+                {% for usuario in usuarios %}
+                    <tr>
+                        <td>{{ usuario[1] }} {{usuario[2] }}</td>
+                        <td>{{ usuario[0] }}</td>
+                        <td>{{ usuario[12] }}</td>
+                        <td>{{ usuario[4] }}</td>
+                        <td>
+                            <div class="acciones">
+                                <button title="Retroalimentar"><i class="fas fa-stream"></i></button>
+                                <a href="/crear-usuario/?idUsuario={{usuario[0]}}&accion=edicionUsuario" title="Editar"><i class="fas fa-edit"></i></a>
+                                <a href="/crear-usuario/" class="delete" title="Eliminar"><i class="fas fa-trash"></i></a>
+                            </div>
+                        </td>
+                    </tr>
+                {% endfor %}
+
             </tbody>
         </table>
     </div>
@@ -67,7 +58,7 @@
 
 <script>
 
-    $( document ).ready(function() {
+    $(document).ready(function () {
         function inicializarTable() {
             var table = $('#usuarios').DataTable({
                 //"order": [[0, "asc"]],
@@ -76,16 +67,16 @@
                 "language": {
                     "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
                 },
-               dom: 'Bfrtip',
-    
-              
-               buttons: [
-                  'copy',
-                  'csv',
-                  'excel',
-                  'pdf',
-                  'print'
-               ],
+                dom: 'Bfrtip',
+
+
+                buttons: [
+                    'copy',
+                    'csv',
+                    'excel',
+                    'pdf',
+                    'print'
+                ],
                 //scrollCollapse: true,
                 //paging: true,
                 fixedColumns: {
