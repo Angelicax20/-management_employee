@@ -2,7 +2,7 @@ from flask import Flask, render_template, redirect, session, flash, request
 from markupsafe import escape
 from werkzeug.security import check_password_hash, generate_password_hash
 from db import seleccion, accion
-from forms import Registro , Login as lg
+from forms import Registro, Login as lg
 import os
 
 app = Flask(__name__)
@@ -23,21 +23,39 @@ def home():
 
 
 
-
+accion = ''
 
 @app.route('/crear-usuario/', methods=['GET', 'POST'])
 def crear_usuario():
+    global accion
 
     """ V5. Utiliza almacenamiento seguro para los datos """
     frm = Registro()
     parametrosURL = {
         'typeForm' : "Crear usuario",
         'urlAction' : "/crear-usuario/",
-        'proceso' : ''
+        'proceso' : '',
+        'accion' : 'crear'
     }
+    
+    if request.args.get('accion'):
+        accion = 'editarUsuario'
+    else:
+        accion = 'CrearUsuario'
 
     if request.method == 'GET':
+
+        if accion == 'editarUsuario':
+            idUsuario = request.args.get('idUsuario')
+            sql = f"SELECT * FROM Usuario WHERE docIdentidad = '{idUsuario}';"
+            resultadoUpdate = seleccion(sql)
+            
+            print(resultadoUpdate)
+
+            parametrosURL['datosUsuario'] = resultadoUpdate
+            parametrosURL['accion'] = 'editar'
         return render_template('crear-usuario.html', prueba=frm, titulo='Registro de datos', parametros = parametrosURL)
+
     else:
         
         nombres = escape(request.form['nombres'])
@@ -61,30 +79,38 @@ def crear_usuario():
             swerror = True
 
         if not swerror:
-             # Preparar el query -- Paramétrico
+            # Preparar el query -- Paramétrico
 
-            sql = "INSERT INTO Usuario (docIdentidad,nombre,apellidos,fechaNac,telefono,correo,tipoContrato,fechaTerContrato,salario) VALUES (?,?,?,?,?,?,?,?,?);"
-            # Ejecutar la consulta
-            clave = generate_password_hash(clave)
+            if accion == 'CrearUsuario':
+                sql = "INSERT INTO Usuario (docIdentidad,nombre,apellidos,fechaNac,telefono,correo,tipoContrato,fechaTerContrato,salario,clave, tipoDocumento, fechaIngreso, cargo, tipoUsuario) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?);"
+                # Ejecutar la consulta
+                clave = generate_password_hash(clave)
 
-            res = accion(sql, (numeroDocumento, nombres, apellidos, fechaNacimiento, telefono, email, tipoContrato, fechaTerminoContrato, salario))
-            # Proceso los resultados
+                res = accion(sql, (numeroDocumento, nombres, apellidos, fechaNacimiento, telefono, email, tipoContrato, fechaTerminoContrato, salario, clave, tipoDoc, fechaIngreso, cargo, tipoUsuario))
+                # Proceso los resultados
 
-            if res==0:
-                parametrosURL['proceso'] = "insertado error"
-                parametrosURL['icon'] = "error"
-                parametrosURL['descripcion'] = "Intente insertar con otro numero de documento"
-            else:
-                parametrosURL['proceso'] = "insertado ok"
-                parametrosURL['icon'] = "success"
-                parametrosURL['descripcion'] = "Registro exitoso"
+                if res==0:
+                    parametrosURL['proceso'] = "insertado error"
+                    parametrosURL['icon'] = "error"
+                    parametrosURL['descripcion'] = "Intente insertar con otro numero de documento"
+                else:
+                    parametrosURL['proceso'] = "insertado ok"
+                    parametrosURL['icon'] = "success"
+                    parametrosURL['descripcion'] = "Registro exitoso"
 
-        frm2 = Registro()
-        return render_template('crear-usuario.html', prueba=frm2, titulo='Registro de datos', parametros = parametrosURL)
+            elif accion == 'editarUsuario':
+                pass
 
-@app.route('/gestionar-usuario/')
+        return render_template('crear-usuario.html', prueba=frm, titulo='Registro de datos', parametros = parametrosURL)
+
+@app.route('/gestionar-usuario/', methods=['GET', 'POST'])
 def gestionar():
-    return render_template('gestionar-usuario.html', titulo='Gestionar usuario')
+
+    if request.method == 'GET':
+        sql = f"SELECT * FROM Usuario;"
+        resultado = seleccion(sql)
+
+    return render_template('gestionar-usuario.html', titulo='Gestionar usuario', usuarios=resultado)
 
 
 @app.route('/empleado/')

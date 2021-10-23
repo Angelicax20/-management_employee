@@ -3,93 +3,201 @@
 
     <div class="contenido">
         <div class="formAdmin">
-            <form id="formAdmin" method="post"  action="/home">
+            <form id="formAdmin" method="post"  action="{{parametros['urlAction']}}">
                 <div class="contenido-form">
-                    <div class="secctionForm">
-                        <div class="elementImg">
-                            <img src="{{url_for('static',filename='img/foto.jpeg')}}" alt="">
-                        </div>
-                        
-                        <div class="elements">
-                            <div class="element">
-                                {{ prueba.nombres(size=100, minlength=1, maxlength=100) }}
-                                {{ prueba.nombres.label }}
+                    {% if parametros['accion'] == 'editar' %}
+                        <div class="secctionForm">
+                            <div class="elementImg">
+                                <img src="{{url_for('static',filename='img/foto.jpeg')}}" alt="">
                             </div>
-    
-                            <div class="element">
-                                {{ prueba.apellidos(size=100, minlength=1, maxlength=100) }}
-                                {{ prueba.apellidos.label }}
+                            
+                            <div class="elements">
+                                <div class="element">
+                                    {{ prueba.nombres(size=100, minlength=1, maxlength=100, value = parametros['datosUsuario'][0][1] ) }}
+                                    {{ prueba.nombres.label }}
+                                </div>
+        
+                                <div class="element">
+                                    {{ prueba.apellidos(size=100, minlength=1, maxlength=100, value = parametros['datosUsuario'][0][2]) }}
+                                    {{ prueba.apellidos.label }}
+                                </div>
+        
+                                <div class="element">
+                                    {{ prueba.fechaNacimiento(value = parametros['datosUsuario'][0][3])}}
+                                    {{ prueba.fechaNacimiento.label }}
+                                </div>
+        
+                                <div class="element">
+                                    {{ prueba.numeroDocumento(value = parametros['datosUsuario'][0][0])}}
+                                    {{ prueba.numeroDocumento.label }}
+                                </div>
+        
+                                <div class="element">
+
+                                    {{ prueba.tipoDoc(value = parametros['datosUsuario'][0][10])}}
+                                    {{ prueba.tipoDoc.label}}
+
+                                </div>
+        
+                                <div class="element">
+
+                                    {{ prueba.clave}}
+                                    {{ prueba.clave.label}}
+
+                                </div>
                             </div>
-    
+                        </div>  
+
+                        <div class="secctionForm">
                             <div class="element">
-                                {{ prueba.fechaNacimiento}}
-                                {{ prueba.fechaNacimiento.label }}
+                                {{ prueba.telefono(value = parametros['datosUsuario'][0][4])}}
+                                {{ prueba.telefono.label}}
                             </div>
-    
+
                             <div class="element">
-                                {{ prueba.numeroDocumento}}
-                                {{ prueba.numeroDocumento.label }}
+                                {{ prueba.email(value = parametros['datosUsuario'][0][5])}}
+                                {{ prueba.email.label}}
                             </div>
-    
+
                             <div class="element">
-
-                                {{ prueba.tipoDoc}}
-                                {{ prueba.tipoDoc.label}}
-
+                                {{ prueba.salario(value = parametros['datosUsuario'][0][7])}}
+                                {{ prueba.salario.label}}
                             </div>
-    
+
                             <div class="element">
-
-                                {{ prueba.clave}}
-                                {{ prueba.clave.label}}
-
+                                {{ prueba.tipoContrato(value = parametros['datosUsuario'][0][6])}}
+                                {{ prueba.tipoContrato.label}}
                             </div>
-                        </div>
-                    </div>  
 
-                    <div class="secctionForm">
-                        <div class="element">
-                            {{ prueba.telefono}}
-                            {{ prueba.telefono.label}}
-                        </div>
+                            <div class="element">
+                                {{ prueba.fechaTerminoContrato(value = parametros['datosUsuario'][0][8])}}
+                                {{ prueba.fechaTerminoContrato.label}}
+                            </div>
 
-                        <div class="element">
-                            {{ prueba.email}}
-                            {{ prueba.email.label}}
-                        </div>
+                            <div class="element">
+                                {{ prueba.fechaIngreso(value = parametros['datosUsuario'][0][11])}}
+                                {{ prueba.fechaIngreso.label}}
+                            </div>
+                            
+                            <div class="element">
+                                {{ prueba.cargo(value = parametros['datosUsuario'][0][12])}}
+                                {{ prueba.cargo.label}}
+                            </div>
 
-                        <div class="element">
-                            {{ prueba.salario}}
-                            {{ prueba.salario.label}}
-                        </div>
+                            <div class="element">
+                                {{ prueba.tipoUsuario(value = parametros['datosUsuario'][0][13])}}
+                                {{ prueba.tipoUsuario.label}}
+                            </div>
+                            
 
-                        <div class="element">
-                            {{ prueba.tipoContrato}}
-                            {{ prueba.tipoContrato.label}}
-                        </div>
+                            {% if request.args.get('accion') == 'edicionUsuario' %}
 
-                        <div class="element">
-                            {{ prueba.fechaTerminoContrato}}
-                            {{ prueba.fechaTerminoContrato.label}}
-                        </div>
+                                <input type="submit" value="Editar usuario">
 
-                        <div class="element">
-                            {{ prueba.fechaIngreso}}
-                            {{ prueba.fechaIngreso.label}}
-                        </div>
-                        
-                        <div class="element">
-                            {{ prueba.cargo}}
-                            {{ prueba.cargo.label}}
-                        </div>
+                            {% else %}
+                            
+                                <input type="submit" value="Crear usuario">
 
-                        <div class="element">
-                            {{ prueba.tipoUsuario}}
-                            {{ prueba.tipoUsuario.label}}
+                            {% endif %}
+                            
                         </div>
+                    {% else %}
+                        <div class="secctionForm">
+                            <div class="elementImg">
+                                <img src="{{url_for('static',filename='img/foto.jpeg')}}" alt="">
+                            </div>
+                            
+                            <div class="elements">
+                                <div class="element">
+                                    {{ prueba.nombres(size=100, minlength=1, maxlength=100) }}
+                                    {{ prueba.nombres.label }}
+                                </div>
+        
+                                <div class="element">
+                                    {{ prueba.apellidos(size=100, minlength=1, maxlength=100) }}
+                                    {{ prueba.apellidos.label }}
+                                </div>
+        
+                                <div class="element">
+                                    {{ prueba.fechaNacimiento}}
+                                    {{ prueba.fechaNacimiento.label }}
+                                </div>
+        
+                                <div class="element">
+                                    {{ prueba.numeroDocumento}}
+                                    {{ prueba.numeroDocumento.label }}
+                                </div>
+        
+                                <div class="element">
 
-                        {{ prueba.btnEnviar}}
-                    </div>
+                                    {{ prueba.tipoDoc}}
+                                    {{ prueba.tipoDoc.label}}
+
+                                </div>
+        
+                                <div class="element">
+
+                                    {{ prueba.clave}}
+                                    {{ prueba.clave.label}}
+
+                                </div>
+                            </div>
+                        </div>  
+
+                        <div class="secctionForm">
+                            <div class="element">
+                                {{ prueba.telefono}}
+                                {{ prueba.telefono.label}}
+                            </div>
+
+                            <div class="element">
+                                {{ prueba.email}}
+                                {{ prueba.email.label}}
+                            </div>
+
+                            <div class="element">
+                                {{ prueba.salario}}
+                                {{ prueba.salario.label}}
+                            </div>
+
+                            <div class="element">
+                                {{ prueba.tipoContrato}}
+                                {{ prueba.tipoContrato.label}}
+                            </div>
+
+                            <div class="element">
+                                {{ prueba.fechaTerminoContrato}}
+                                {{ prueba.fechaTerminoContrato.label}}
+                            </div>
+
+                            <div class="element">
+                                {{ prueba.fechaIngreso}}
+                                {{ prueba.fechaIngreso.label}}
+                            </div>
+                            
+                            <div class="element">
+                                {{ prueba.cargo}}
+                                {{ prueba.cargo.label}}
+                            </div>
+
+                            <div class="element">
+                                {{ prueba.tipoUsuario}}
+                                {{ prueba.tipoUsuario.label}}
+                            </div>
+                            
+
+                            {% if request.args.get('accion') == 'edicionUsuario' %}
+
+                                <input type="submit" value="Editar usuario">
+
+                            {% else %}
+                            
+                                <input type="submit" value="Crear usuario">
+
+                            {% endif %}
+                            
+                        </div>
+                    {% endif %}
                 </div>
             </form>
         </div>
@@ -104,8 +212,11 @@
                     icon: "{{parametros['icon']}}",
                     title: "{{parametros['descripcion']}}"
                 }).then((result) => {
-                    document.querySelector('#formAdmin').reset();
-                    console.log("Hola que hace");
+                    let typeRequest = "{{parametros['descripcion']}}";
+
+                    if (typeRequest == 'Registro exitoso') {
+                        window.location.href = '/crear-usuario/';
+                    }
                 })
             })
 

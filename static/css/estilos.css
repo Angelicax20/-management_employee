@@ -350,7 +350,7 @@ form .element input[type="date"] ~ label{
 }
 
 .gestionUsuarios{
-    height: 100%;
+    width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -400,6 +400,6 @@ form .element input[type="date"] ~ label{
     color: #fff;
 }
 
-.gestionUsuarios .contenedorTable table .acciones button.delete{
+.gestionUsuarios .contenedorTable table .acciones .delete{
     background-color: #b81313;
 }

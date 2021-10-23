@@ -38,3 +38,4 @@ class Registro(FlaskForm):
     tipoUsuario = SelectField(u'Tipo de usuario', choices=[('', ''),('admin', 'Administrador'), ('empleado', 'Empleado')], validators = [InputRequired(message='Seleccione el tipo de usuario')])
 
     btnEnviar = SubmitField('Crear usuario')
+
