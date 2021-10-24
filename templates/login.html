@@ -5,6 +5,7 @@
 		<meta charset="utf-8">
 		<title>Gestion Empleados | Ingreso</title>
 		<link rel="stylesheet" href="{{url_for('static',filename='css/login_style.css')}}">
+		<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css">
 		
 	</head>
@@ -12,7 +13,7 @@
 		<!--form area start-->
 		<div class="form">
 			<!--login form start-->
-			<form class="login-form" action="/" method="post">
+			<form class="login-form" action="/login/" method="post">
 				<i class="fas fa-user-circle"></i>
 				{{prueba.usu(class_="user-input",placeholder="Usuario")}}
 				<!-- <input class="user-input" type="text" name="" placeholder="Usuario" required> -->
@@ -23,6 +24,26 @@
 			</form>
 			<!--login form end-->
 		</div>
+
+		<script>
+			function alertas(){
+				let resultLogin = "{{parametros['estadoLogin']}}"
+
+				if (resultLogin == 'usuario no encontrado') {
+					Swal.fire({
+						icon: "error",
+						title: "El usuario ingresado no se encuentra registrado"
+					})
+				} else if (resultLogin == 'clave incorrecta') {
+					Swal.fire({
+						icon: "error",
+						title: "Contraseña incorrecta"
+					})
+				}
+			}
+
+			alertas();
+		</script>
 		<!--form area end-->
 	</body>
 </html>

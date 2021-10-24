@@ -1,4 +1,3 @@
-
 {% extends 'index.html' %}
 {% block cuerpo %}
 
@@ -29,7 +28,7 @@
                         <td>{{ usuario[4] }}</td>
                         <td>
                             <div class="acciones">
-                                <button title="Retroalimentar"><i class="fas fa-stream"></i></button>
+                                <button data-bs-toggle="modal" onclick="cargarInfoModal('{{usuario[0]}}','{{usuario[1]}} {{usuario[2]}}')" data-bs-target="#staticBackdrop" title="Retroalimentar"><i class="fas fa-stream"></i></button>
                                 <a href="/crear-usuario/?idUsuario={{usuario[0]}}&accion=edicionUsuario" title="Editar"><i class="fas fa-edit"></i></a>
                                 <button data-value="{{usuario[0]}}" id="btn{{usuario[0]}}" onclick="eliminarUsuario('btn{{usuario[0]}}')" class="delete" title="Eliminar"><i class="fas fa-trash"></i></button>
                             </div>
@@ -39,6 +38,54 @@
 
             </tbody>
         </table>
+
+        <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="vertical-alignment-helper">
+                <div class="modal-dialog modal-lg vertical-align-center">
+                <div class="modal-content">
+                    <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Desempeño mensual</h5>
+                    <button type="button" onclick="limpiarModal()" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <p style="font-size: 13px;">Empleado: <span id="nombreEmpleado"></span></p>
+                            </div>
+
+                            <div class="col-lg-12">
+                                <form action="" id="formRetroalimentacion">
+                                        <div class="row">
+                                            
+                                            <div class="col-lg-2">
+                                                <label>puntaje</label><small id="descripcionEmpleado" class="text-danger">*</small>
+                                                <input id="puntajeUsuario" type="number" class="form-control">
+
+                                                <input type="hidden" id="idUsuarioModal">
+                                            </div>
+
+                                            <br>
+                                            <div class="col-lg-12">
+                                                <label>Descripción</label><small id="descripcionEmpleado" class="text-danger">*</small>
+                                                <textarea id="descripcionRetrolimentacion" type="text" class="form-control" style="margin-top: 0px; margin-bottom: 0px; height: 160px;" id=""></textarea>
+
+                                                <input type="hidden" id="idUsuarioModal">
+                                            </div>
+
+                                        </div>
+                                </form>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" onclick="generarRetroalimentacion()">Generar</button>
+                    </div>
+                </div>
+                </div>
+            </div>
+          </div>
     </div>
 </div>
 
@@ -106,6 +153,20 @@
                     title: "Ha ocurrido un error, intenta nuevamente"
                 })
 
+            } else if (statusDelete == 'insert report error'){
+
+                Swal.fire({
+                    icon: "error",
+                    title: "Ha ocurrido un error al generar el reporte, intenta nuevamente"
+                })
+
+            } else if (statusDelete == 'insert report succes'){
+                Swal.fire({
+                    icon: "success",
+                    title: "Reporte generado"
+                }).then((result) => {
+                    window.location.href = '/gestionar-usuario/';
+                })
             }
         }
 
@@ -134,5 +195,47 @@
             }
         })
     }
+
+    function cargarInfoModal(idUsuario, nombreUsuario){
+        document.querySelector('#nombreEmpleado').innerHTML = nombreUsuario;
+        document.querySelector('#idUsuarioModal').value = idUsuario;
+    }
+
+    function limpiarModal(){
+        document.querySelector('#formRetroalimentacion').reset();
+    }
+
+    function generarRetroalimentacion(){
+
+        Swal.fire({
+            title: '¿Generar reporte?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Si',
+            cancelButtonText: 'No'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                
+                
+                let idUsuario = document.querySelector('#idUsuarioModal').value;
+                let descripcion = document.querySelector('#descripcionRetrolimentacion').value;
+                let puntaje = document.querySelector('#puntajeUsuario').value;
+
+                if (descripcion == '' || puntaje == '') {
+                    Swal.fire({
+                        title: 'Llene todos los campos',
+                        icon: 'error'
+                    })
+                }else{
+                    window.location.href = '/gestionar-usuario/?idUsuario='+idUsuario+'&accion=generarReporte&descripcion='+descripcion+"&puntaje="+puntaje;
+                }
+
+            }
+        })
+    }
+
 </script>
+
 {% endblock %}

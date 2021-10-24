@@ -1,4 +1,3 @@
-
 from flask import Flask, render_template, redirect, session, flash, request
 from markupsafe import escape
 from werkzeug.security import check_password_hash, generate_password_hash
@@ -14,13 +13,8 @@ userlog = ""
 @app.route('/index/',methods=['GET', 'POST'])
 @app.route('/home/',methods=['GET', 'POST'])
 def home():
-    global userlog 
-    if request.method == 'GET' and  userlog=="":
-        return login()
-    else:
-        if userlog=="":
-            userlog=escape(request.form["usu"]) 
-        return render_template('index.html',usuario=userlog)
+
+    return render_template('index.html')
 
 
 
@@ -80,12 +74,14 @@ def crear_usuario():
         tipoUsuario = escape(request.form['tipoUsuario'])
         
         if accionGlobal == 'CrearUsuario':
-            sql = "INSERT INTO Usuario (docIdentidad,nombre,apellidos,fechaNac,telefono,correo,tipoContrato,fechaTerContrato,salario,clave, tipoDocumento, fechaIngreso, cargo, tipoUsuario) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?);"
+            sql = "INSERT INTO Usuario (docIdentidad, nombre, apellidos, fechaNac, telefono, correo, tipoContrato, salario, fechaTerContrato, clave, tipoDocumento, fechaIngreso, cargo, tipoUsuario, estado) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);"
             # Ejecutar la consulta
             clave = generate_password_hash(clave)
 
-            res = accion(sql, (numeroDocumento, nombres, apellidos, fechaNacimiento, telefono, email, tipoContrato, fechaTerminoContrato, salario, clave, tipoDoc, fechaIngreso, cargo, tipoUsuario))
+            res = accion(sql, (numeroDocumento, nombres, apellidos, fechaNacimiento, telefono, email, tipoContrato, salario, fechaTerminoContrato, clave, tipoDoc, fechaIngreso, cargo, tipoUsuario, 'A'))
             # Proceso los resultados
+
+            print(res)
 
             if res == 0:
                 parametrosURL['proceso'] = "insertado error"
@@ -134,7 +130,6 @@ def gestionar():
         if request.args.get('accion') == 'eliminarUsuario':
             idUsuario = request.args.get('idUsuario')
 
-            print(idUsuario)
 
             sqlUpdate = "UPDATE Usuario SET estado = ? WHERE docIdentidad = ?"
             res = accion(sqlUpdate, ('I',idUsuario))
@@ -144,28 +139,89 @@ def gestionar():
             else:
                 parametrosURL['estadoUpdate'] = 'delete succes'
 
+        if request.args.get('accion') == 'generarReporte':
+            sql = "INSERT INTO Reporte (descripcion, puntaje, Usuario_idDocumento_FK) VALUES (?,?,?);"
+
+            idUsuario = request.args.get('idUsuario')
+            puntaje = request.args.get('puntaje')
+            descripcion = request.args.get('descripcion')
+
+            res = accion(sql, (descripcion, puntaje, idUsuario))
+
+            if res == 0:
+                parametrosURL['estadoUpdate'] = 'insert report error'
+            else:
+                parametrosURL['estadoUpdate'] = 'insert report succes'
+
+
         sql = f"SELECT * FROM Usuario WHERE estado = 'A';"
         resultado = seleccion(sql)
 
     return render_template('gestionar-usuario.html', titulo='Gestionar usuario', usuarios=resultado, parametros = parametrosURL)
 
 
-@app.route('/empleado/')
+@app.route('/empleado/', methods=['GET', 'POST'])
 def empleado():
-    return render_template('empleado.html', titulo='Empleado')
+    
+    if request.method == 'GET':
+        datosEmpleado = session['datosEmpleado']
+
+        idDocumento = datosEmpleado[0][0]
+        sql = f"SELECT max(idReporte), descripcion, puntaje, Usuario_idDocumento_FK  FROM Reporte WHERE Usuario_idDocumento_FK = {idDocumento}"
+        res = seleccion(sql)
+
+        return render_template('empleado.html', titulo='Empleado', datosSesion = datosEmpleado, infoReporte = res)
+
 
 
 @app.route('/login/',methods=['GET', 'POST'])
 def login():
-    if request.method == 'GET':
-        frm_login = lg()
-        return render_template('login.html',prueba=frm_login)
-    else:
-        return render_template('index.html')
-        # return home();
+    global userlog 
+
+    parametrosURL = {
+        'estadoLogin' : ''
+    }
     
+    frm_login = lg()
 
+    if request.method == 'GET':
+        return render_template('login.html',prueba=frm_login, parametros = parametrosURL)
 
+    else:
+
+        userlog = escape(request.form["usu"]) #cedula
+        password = escape(request.form["cla"])
+
+        sql = f"SELECT *  FROM Usuario WHERE docIdentidad='{userlog}'"
+        res = seleccion(sql)
+
+        if len(res) == 0:
+            parametrosURL['estadoLogin'] = 'usuario no encontrado'
+            return render_template('login.html', prueba=frm_login, parametros=parametrosURL)
+
+        else:
+            
+            claveBd = res[0][9]
+
+            if check_password_hash(claveBd,password):
+                session.clear()
+                
+                session['tipoUsuario'] = res[0][13]
+
+                if session['tipoUsuario'] == 'empleado':
+                    session['datosEmpleado'] = res
+                    return redirect('/empleado/')
+
+                else:
+                    
+                    session['idUsuario'] = res[0][0]
+                    session['nombreUsuario'] = res[0][1]+" "+res[0][2]
+                    return redirect('/index/')
+            else:
+                parametrosURL['estadoLogin'] = 'clave incorrecta'
+                return render_template('login.html', prueba=frm_login, parametros=parametrosURL)
+
+            
 if __name__ == '__main__':
     app.run(debug=True)
 

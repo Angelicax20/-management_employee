@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="es">
 
@@ -14,8 +13,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=PT+Sans&family=Poppins:wght@200&family=Roboto:wght@300&family=Ubuntu:wght@300&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="{{url_for('static',filename='css/estilos.css')}}">
-    {% if titulo %}
+    <link rel="stylesheet" href="{{url_for('static',filename='css/estilos.css')}}"> {% if titulo %}
     <title>{{ titulo }}</title>
     {% else %}
     <title>Inicio</title>
@@ -43,11 +41,23 @@
                 <h1>Inicio</h1>
                 {% endif %}
             </div>
-            <div class="imgUser">
+
+            <!-- <div class="imgUser">
                 <div class="box">
                     <img src="{{url_for('static',filename='img/foto.jpeg')}}" alt="">
                 </div>
+            </div> -->
+            <div class="imgUser">
+                <div class="box">
+                    <input type="checkbox" id="foto">
+                    <label for="foto"><img src="{{url_for('static',filename='img/foto.jpeg')}}" alt=""></label>
+                    <ul class="opciones">
+                        <!-- <li><a href="#">Cambiar contraseña</a></li> -->
+                        <li><a href="/login/">Cerrar sesión</a></li>
+                    </ul>
+                </div>
             </div>
+
         </header>
 
         <main class="main">
@@ -70,4 +80,5 @@
     </div>
 
 </body>
+
 </html>

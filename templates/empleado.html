@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -14,6 +15,7 @@
     <link rel="stylesheet" href="{{url_for('static',filename='css/empleado.css')}}">
     <title>Inicio</title>
 </head>
+
 <body>
     <!-- Encabezado -->
     <header>
@@ -21,17 +23,28 @@
             <h1>Empleado</h1>
         </div>
         <!-- Imagen de perfil -->
-        <img src="{{url_for('static',filename='img/foto.jpeg')}}" title="Alejandro Valencia">
-     </header>
+        <!--         <img src="{{url_for('static',filename='img/foto.jpeg')}}" title="Alejandro Valencia">
+ -->
+        <!--  <div class="imgUser">
+            <div class="box"> -->
+        <input type="checkbox" id="foto">
+        <label for="foto"><img src="{{url_for('static',filename='img/foto.jpeg')}}" alt=""></label>
+        <ul class="opciones">
+            <!-- <li><a href="#">Cambiar contraseña</a></li> -->
+            <li><a href="/login/">Cerrar sesión</a></li>
+        </ul>
+        <!--    </div>
+        </div> -->
+    </header>
 
     <!-- Contenedor -->
-     <div class="contenedor">
-         <!-- Estadisticas de puntuaciones -->
+    <div class="contenedor">
+        <!-- Estadisticas de puntuaciones -->
         <div class="info-mensual">
             <div class="puntos">
                 <div class="ranking">
                     <p>Ranking obtenido</p>
-                    <p>24 / 100</p> 
+                    <p>24 / 100</p>
                 </div>
                 <div class="grafico">
                     <img src="{{url_for('static',filename='img/grafico.PNG')}}" alt="">
@@ -40,8 +53,7 @@
             <!-- Retroalimentación -->
             <div class="retroalimentacion">
                 <h2>Retroalimentación</h2>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga fugiat dicta est sunt, optio doloribus ad soluta eaque, reiciendis rerum quo ratione dolore ipsum adipisci expedita neque aliquid suscipit praesentium!. Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga fugiat dicta est sunt, optio doloribus ad soluta eaque, reiciendis rerum quo ratione dolore ipsum adipisci expedita neque aliquid suscipit praesentium!.Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga fugiat dicta est sunt, optio doloribus ad soluta eaque, reiciendis rerum quo ratione dolore ipsum adipisci expedita neque aliquid suscipit praesentium!
-                </p>
+                <p> {{infoReporte[0][1]}} </p>
             </div>
         </div>
         <!-- Información sobre el empleado -->
@@ -49,19 +61,19 @@
             <div class="perfil">
                 <!-- Foto del empleado -->
                 <img src="../static/img/foto.jpeg" alt="">
-                <p>Alejandro Valencia</p>
+                <p>{{datosSesion[0][1]}} {{datosSesion[0][2]}} </p>
             </div>
             <div class="datos">
-                <p>C.C:10047673</p>
-                <p>Tel: 3004604190</p>
-                <p>Email: aval13@uninorte.edu.co</p>
-                <p>Fecha de ingreso: 10/12/2014</p>
-                <p>Salario: 12.000.000</p>
-                <p>Cargo: Analista</p>
+                <p>C.C: {{datosSesion[0][0]}}</p>
+                <p>Tel: {{datosSesion[0][4]}}</p>
+                <p>Email: {{datosSesion[0][5]}}</p>
+                <p>Fecha de ingreso: {{datosSesion[0][11]}}</p>
+                <p>Salario: {{datosSesion[0][7]}}</p>
+                <p>Cargo: {{datosSesion[0][12]}}</p>
             </div>
             <!-- Puntuación recibida -->
             <div class="puntuacion">
-                <p class="puntos">80</p>
+                <p class="puntos">{{infoReporte[0][2]}}</p>
                 <p>Puntos</p>
             </div>
         </div>
@@ -83,4 +95,5 @@
         </div>
     </footer>
 </body>
+
 </html>
