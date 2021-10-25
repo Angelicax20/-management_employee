@@ -19,8 +19,9 @@ idUsuario = ''
 def home():
     global userlog
     print(userlog)
-    if userlog=="":
-        print(userlog)
+    
+    if userlog.strip()=="":
+        print("entre aca:",userlog)
         return redirect('/login')
     elif session['tipoUsuario'] == 'empleado':
         return redirect('/empleado')
@@ -42,7 +43,7 @@ def crear_usuario():
         global accionGlobal
         global idUsuario
         print(userlog)
-        if userlog=="":
+        if userlog.strip()=="":
             print(userlog)
             return redirect('/login')
         elif session['tipoUsuario'] == 'empleado':
@@ -144,7 +145,7 @@ def crear_usuario():
 def gestionar():
     global userlog
     print(userlog)
-    if userlog=="":
+    if userlog.strip()=="":
         print(userlog)
         return redirect('/login')
     elif session['tipoUsuario'] == 'empleado':
@@ -196,7 +197,7 @@ def gestionar():
 def empleado():
     global userlog
     print(userlog)
-    if userlog=="":
+    if userlog.strip()=="":
         print("entre")
         return redirect('/login')
         
