@@ -13,14 +13,22 @@ userlog = ""
 @app.route('/index/',methods=['GET', 'POST'])
 @app.route('/home/',methods=['GET', 'POST'])
 def home():
-
-    return render_template('index.html')
+    if not userlog=="":
+        return render_template('index.html')
+    else:
+        return redirect('/login')
 
 
 
 accionGlobal = ''
 idUsuario = ''
 
+@app.route('/logout/', methods=['GET','POST'])
+def logout():
+    session.clear()
+    global userlog
+    userlog = ""
+    return redirect('/')
 
 @app.route('/crear-usuario/', methods=['GET', 'POST'])
 def crear_usuario():

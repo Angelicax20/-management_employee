@@ -4,9 +4,11 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<meta charset="utf-8">
 		<title>Gestion Empleados | Ingreso</title>
-		<link rel="stylesheet" href="{{url_for('static',filename='css/login_style.css')}}">
-		<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css">
+		<!-- <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script> -->
+		<link rel="stylesheet" href="{{url_for('static',filename='css/login_style.css')}}">
+		<script src="{{url_for('static', filename='js/sweetalert2.all.js')}}"></script>
+		<link rel="stylesheet" href="{{url_for('static', filename='css/sweetalert2.css')}}">
 		
 	</head>
 	<body>
@@ -26,6 +28,7 @@
 		</div>
 
 		<script>
+			
 			function alertas(){
 				let resultLogin = "{{parametros['estadoLogin']}}"
 
