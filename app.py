@@ -1,3 +1,4 @@
+from re import U
 from flask import Flask, render_template, redirect, session, flash, request
 from markupsafe import escape
 from werkzeug.security import check_password_hash, generate_password_hash
@@ -192,10 +193,11 @@ def empleado():
     global userlog
     print(userlog)
     if userlog=="":
-        print(userlog)
+        print("entre")
         return redirect('/login')
         
-    else:
+    elif session['tipoUsuario'] == 'empleado':
+
         print(userlog)    
         if request.method == 'GET':
             datosEmpleado = session['datosEmpleado']
@@ -205,6 +207,11 @@ def empleado():
             res = seleccion(sql)
 
             return render_template('empleado.html', titulo='Empleado', datosSesion = datosEmpleado, infoReporte = res)
+    elif session['tipoUsuario'] == 'admin':
+         return redirect('/')
+    else:
+        print(session['tipoUsuario'])
+        return redirect('/login')
 
 @app.route('/login/',methods=['GET', 'POST'])
 def login():
