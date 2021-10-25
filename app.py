@@ -22,10 +22,10 @@ def home():
     if userlog=="":
         print(userlog)
         return redirect('/login')
-        
+    elif session['tipoUsuario'] == 'empleado':
+        return redirect('/empleado')
     else:
-        print(userlog)
-        return render_template('index.html')
+       return render_template('index.html')
 
 @app.route('/logout/', methods=['GET','POST'])
 def logout():
