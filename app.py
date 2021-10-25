@@ -45,6 +45,8 @@ def crear_usuario():
         if userlog=="":
             print(userlog)
             return redirect('/login')
+        elif session['tipoUsuario'] == 'empleado':
+            return redirect('/empleado')
         else:
     
 
@@ -145,9 +147,11 @@ def gestionar():
     if userlog=="":
         print(userlog)
         return redirect('/login')
-        
+    elif session['tipoUsuario'] == 'empleado':
+        return redirect('/empleado')
     else:
         print(userlog)
+        
 
         parametrosURL = {
             'estadoUpdate' : 'noUpdate'
@@ -215,8 +219,11 @@ def empleado():
 
 @app.route('/login/',methods=['GET', 'POST'])
 def login():
-    global userlog 
-    
+    global userlog
+    session.clear()
+    print(userlog)
+    userlog = ""
+    print(userlog)
 
     parametrosURL = {
         'estadoLogin' : ''
