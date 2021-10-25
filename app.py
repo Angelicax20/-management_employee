@@ -268,6 +268,10 @@ def login():
                 parametrosURL['estadoLogin'] = 'clave incorrecta'
                 return render_template('login.html', prueba=frm_login, parametros=parametrosURL)
 
+
+@app.errorhandler(404)
+def not_found(error):
+    return render_template('404.html', error=error)
 if __name__ == '__main__':
     app.run(debug=True)
 

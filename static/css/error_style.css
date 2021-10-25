@@ -1,0 +1,83 @@
+*{
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	text-decoration: none;
+}
+:root{
+	--blue:rgb(4 9 32);;
+	--negro:rgb(17, 17, 17);
+}
+body{
+	height: 100vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background: var(--blue);
+}
+.error{
+  	display: flex;
+	color: white;
+	text-align: center;
+    justify-content: center;
+    align-content: center;
+    flex-direction: column;
+}
+.error .oops{
+    padding-top: 15px;
+    font-size: 100px;
+}
+.error .e404{
+    font-size: 10px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+.error .face{
+    font-size: 90px;
+}
+
+.error p{
+    padding-bottom: 5px;
+    font-size: 20px;
+    color:chartreuse;
+
+}
+
+
+.error .btn{
+    background: linear-gradient(-45deg, #3f00b5, #9f69fe, #27c8b7, #3f00b5);
+	background-size: 800% 400%;
+	padding: 1em 2em;
+	cursor: pointer;
+	border: none;
+	border-radius: 10px;
+	font-size: 20px;
+	font-weight: 700;
+	color: white;
+	transition: all .5s ease-in-out;
+	animation: gradient 10s infinite cubic-bezier(.62, .28, .23, .99) both;
+    
+}
+
+.error .btn:hover {
+	animation: gradient 3s infinite;
+	transform: scale(1.05);
+}
+
+.error.btn:active {
+	animation: gradient 3s infinite;
+	transform: scale(0.8);
+}
+
+   @keyframes gradient {
+	0% {
+	 background-position: 0% 50%;
+	}
+   
+	50% {
+	 background-position: 100% 50%;
+	}
+   
+	100% {
+	 background-position: 0% 50%;
+	}
+   }
