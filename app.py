@@ -9,14 +9,20 @@ app = Flask(__name__)
 
 app.secret_key = os.urandom(24)
 userlog = ""
+
 @app.route('/',methods=['GET', 'POST'])
 @app.route('/index/',methods=['GET', 'POST'])
 @app.route('/home/',methods=['GET', 'POST'])
 def home():
-    if not userlog=="":
-        return render_template('index.html')
-    else:
+    global userlog
+    print(userlog)
+    if userlog=="":
+        print(userlog)
         return redirect('/login')
+        
+    else:
+        print(userlog)
+        return render_template('index.html')
 
 
 
@@ -27,7 +33,9 @@ idUsuario = ''
 def logout():
     session.clear()
     global userlog
+    print(userlog)
     userlog = ""
+    print(userlog)
     return redirect('/')
 
 @app.route('/crear-usuario/', methods=['GET', 'POST'])
@@ -185,6 +193,7 @@ def empleado():
 @app.route('/login/',methods=['GET', 'POST'])
 def login():
     global userlog 
+    
 
     parametrosURL = {
         'estadoLogin' : ''
