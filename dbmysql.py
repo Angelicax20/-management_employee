@@ -1,11 +1,14 @@
 import pymysql.cursors
 
 # Connect to the database
-connection = pymysql.connect(host='grupo9.mysql.pythonanywhere-services.com',
+try:
+    connection = pymysql.connect(host='grupo9.mysql.pythonanywhere-services.com',
                                 user='grupo9',
                                 password='empleados',
-                                db='grupo9$grupo_9',cursorclass=pymysql.cursors.DictCursor)
-
+                                db='grupo9$grupo_9',
+                                cursorclass=pymysql.cursors.DictCursor)
+except:
+    pass
 
 
 def seleccion2(sql) -> list:
