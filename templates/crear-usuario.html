@@ -275,4 +275,31 @@
 
         </script>
     {% endif %}
+
+    <script>
+        
+        document.addEventListener('DOMContentLoaded', function(){
+            const fecha = new Date();
+            let year = fecha.getFullYear();
+            let month = fecha.getMonth();
+            let day = fecha.getDay();
+            let date = fecha.getDate();
+
+            if (parseInt(month) < 10) {
+                month = '0'+month;
+            }
+
+            if (parseInt(day) < 10) {
+                day = '0'+day;
+            }
+
+            let fechas = year+'-'+month+'-'+day;
+
+            document.querySelector('#fechaNacimiento').setAttribute('max',fechas);
+            document.querySelector('#fechaTerminoContrato').setAttribute('max',fechas);
+            document.querySelector('#fechaIngreso').setAttribute('max',fechas);
+            document.querySelector('#fechaNacimiento').setAttribute('min','1950-01-01');
+
+        })
+    </script>
 {% endblock %}

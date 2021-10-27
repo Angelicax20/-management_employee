@@ -55,7 +55,7 @@ def crear_usuario():
             }
 
             if request.method == 'GET':
-
+                titulo = 'Registro de datos'
                 if request.args.get('accion') == 'edicionUsuario':
                     accionGlobal = 'editarUsuario'
                 else:
@@ -74,11 +74,12 @@ def crear_usuario():
 
                     parametrosURL['datosUsuario'] = resultadoUpdate
                     parametrosURL['accion'] = 'editar'
+                    titulo='Edición de usuario'
                     
-                return render_template('crear-usuario.html', prueba=frm, titulo='Registro de datos', parametros = parametrosURL)
+                return render_template('crear-usuario.html', prueba=frm, titulo=titulo, parametros = parametrosURL)
 
             else:
-
+                titulo = 'Registro de datos'
                 nombres = escape(request.form['nombres'])
                 apellidos = escape(request.form['apellidos'])
                 fechaNacimiento = escape(request.form['fechaNacimiento'])
@@ -141,6 +142,8 @@ def crear_usuario():
                         parametrosURL['descripcion'] = "Actualización exitosa"
 
                         idUsuario = ''
+                    
+                    titulo = 'Edición de usuario'
 
 
                 return render_template('crear-usuario.html', prueba=frm, titulo='Registro de datos', parametros = parametrosURL)

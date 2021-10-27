@@ -1,5 +1,5 @@
 :root {
-    --colorFondo1: #1e3267;
+    --colorFondo1: #040920;
     --colorFondo2: #f4f1fa;
     --colorFuente1: #d8d8d8;
     --colorFuente2: #707070;
@@ -19,7 +19,7 @@ body {
 
 .menu-lateral {
     background: var(--colorFondo1);
-    width: 13%;
+    width: 15%;
     height: 100vh;
     border-right: 1px solid var(--colorFuente1);
     padding: 30px 20px;
@@ -42,7 +42,7 @@ body {
     color: var(--colorFuente1);
     text-decoration: none;
     font-family: 'Roboto', sans-serif;
-    font-size: 16px;
+    font-size: 14px;
 }
 
 .menu-lateral nav ul li a:hover {
@@ -50,7 +50,7 @@ body {
 }
 
 .contenedor {
-    width: 87%;
+    width: 85%;
     min-height: 100vh;
 }
 
@@ -429,7 +429,7 @@ form .element input[type="date"]~label {
 .gestionUsuarios .contenedorTable table .acciones button,
 .gestionUsuarios .contenedorTable table .acciones a {
     border: none;
-    background-color: #2681d6;
+    background-color: var(--colorFondo1);
     border-radius: 3px;
     padding: 4px 10px;
 }
