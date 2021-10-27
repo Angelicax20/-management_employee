@@ -3,6 +3,7 @@ from flask import Flask, render_template, redirect, session, flash, request
 from markupsafe import escape
 from werkzeug.security import check_password_hash, generate_password_hash
 from db import seleccion, accion
+from dbmysql import seleccion2, accion2
 from forms import Registro, Login as lg
 import os
 
@@ -65,8 +66,10 @@ def crear_usuario():
                     idUsuario = request.args.get('idUsuario')
                     
                     sql = f"SELECT * FROM Usuario WHERE docIdentidad = '{idUsuario}';"
-                    resultadoUpdate = seleccion(sql)
-
+                    try:
+                        resultadoUpdate = seleccion(sql)
+                    except:
+                        resultadoUpdate = seleccion2(sql)    
 
                     parametrosURL['datosUsuario'] = resultadoUpdate
                     parametrosURL['accion'] = 'editar'
@@ -94,8 +97,12 @@ def crear_usuario():
                     sql = "INSERT INTO Usuario (docIdentidad, nombre, apellidos, fechaNac, telefono, correo, tipoContrato, salario, fechaTerContrato, clave, tipoDocumento, fechaIngreso, cargo, tipoUsuario, estado) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);"
                     # Ejecutar la consulta
                     clave = generate_password_hash(clave)
-
-                    res = accion(sql, (numeroDocumento, nombres, apellidos, fechaNacimiento, telefono, email, tipoContrato, salario, fechaTerminoContrato, clave, tipoDoc, fechaIngreso, cargo, tipoUsuario, 'A'))
+                    try:
+                           
+                        res = accion(sql, (numeroDocumento, nombres, apellidos, fechaNacimiento, telefono, email, tipoContrato, salario, fechaTerminoContrato, clave, tipoDoc, fechaIngreso, cargo, tipoUsuario, 'A'))
+                    except:
+                        res = accion2(sql, (numeroDocumento, nombres, apellidos, fechaNacimiento, telefono, email, tipoContrato, salario, fechaTerminoContrato, clave, tipoDoc, fechaIngreso, cargo, tipoUsuario, 'A'))
+                        
                     # Proceso los resultados
                     # linea de prueba    
                     # print(res)
@@ -114,8 +121,10 @@ def crear_usuario():
                     sql = "UPDATE Usuario SET docIdentidad = ?, nombre = ?, apellidos = ?, fechaNac = ?, telefono = ?, correo = ?, tipoContrato = ?, fechaTerContrato = ?, salario = ?,  clave = ?, tipoDocumento = ?, fechaIngreso = ?, cargo = ?, tipoUsuario = ? WHERE docIdentidad = ?"
                     
                     clave = generate_password_hash(clave)
-
-                    res = accion(sql, (numeroDocumento, nombres, apellidos, fechaNacimiento, telefono, email, tipoContrato, fechaTerminoContrato, salario, clave, tipoDoc, fechaIngreso, cargo, tipoUsuario, idUsuario))
+                    try:
+                        res = accion(sql, (numeroDocumento, nombres, apellidos, fechaNacimiento, telefono, email, tipoContrato, fechaTerminoContrato, salario, clave, tipoDoc, fechaIngreso, cargo, tipoUsuario, idUsuario))
+                    except:
+                        res = accion2(sql, (numeroDocumento, nombres, apellidos, fechaNacimiento, telefono, email, tipoContrato, fechaTerminoContrato, salario, clave, tipoDoc, fechaIngreso, cargo, tipoUsuario, idUsuario))
                     # linea de prueba 
                     #print("idUsuario vale:")
                     #print(idUsuario)
@@ -154,8 +163,10 @@ def gestionar():
 
 
                 sqlUpdate = "UPDATE Usuario SET estado = ? WHERE docIdentidad = ?"
-                res = accion(sqlUpdate, ('I',idUsuario))
-                
+                try:
+                    res = accion(sqlUpdate, ('I',idUsuario))
+                except:
+                    res = accion2(sqlUpdate, ('I',idUsuario))
                 if res == 0:
                     parametrosURL['estadoUpdate'] = 'delete error'
                 else:
@@ -167,8 +178,10 @@ def gestionar():
                 idUsuario = request.args.get('idUsuario')
                 puntaje = request.args.get('puntaje')
                 descripcion = request.args.get('descripcion')
-
-                res = accion(sql, (descripcion, puntaje, idUsuario))
+                try:
+                    res = accion(sql, (descripcion, puntaje, idUsuario))
+                except:
+                    res = accion2(sql, (descripcion, puntaje, idUsuario))
 
                 if res == 0:
                     parametrosURL['estadoUpdate'] = 'insert report error'
@@ -177,8 +190,10 @@ def gestionar():
 
 
             sql = f"SELECT * FROM Usuario WHERE estado = 'A';"
-            resultado = seleccion(sql)
-
+            try:
+                resultado = seleccion(sql)
+            except:    
+                resultado = seleccion2(sql)
         return render_template('gestionar-usuario.html', titulo='Gestionar usuario', usuarios=resultado, parametros = parametrosURL)
 
 @app.route('/empleado/', methods=['GET', 'POST'])
@@ -194,7 +209,10 @@ def empleado():
 
             idDocumento = datosEmpleado[0][0]
             sql = f"SELECT max(idReporte), descripcion, puntaje, Usuario_idDocumento_FK  FROM Reporte WHERE Usuario_idDocumento_FK = {idDocumento}"
-            res = seleccion(sql)
+            try:    
+                res = seleccion(sql)
+            except:
+                res = seleccion2(sql)
 
             return render_template('empleado.html', titulo='Empleado', datosSesion = datosEmpleado, infoReporte = res)
     elif session['tipoUsuario'] == 'admin':
@@ -212,9 +230,6 @@ def login():
             return redirect('/empleado/')
         else:
             return redirect('/home')  
-
-
-
     except:
         pass
 
@@ -237,7 +252,10 @@ def login():
         password = escape(request.form["cla"])
 
         sql = f"SELECT *  FROM Usuario WHERE docIdentidad='{userlog}'"
-        res = seleccion(sql)
+        try:
+            res = seleccion(sql)
+        except:
+            res = seleccion2(sql)
 
         if len(res) == 0:
             parametrosURL['estadoLogin'] = 'usuario no encontrado'
