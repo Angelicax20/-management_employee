@@ -206,8 +206,20 @@ def empleado():
 
 @app.route('/login/',methods=['GET', 'POST'])
 def login():
+    empleado
+    try :
+        if session['tipoUsuario'] == 'empleado':
+            return redirect('/empleado/')
+        else:
+            return redirect('/home')  
+
+
+
+    except:
+        pass
+
+      
     global userlog
-    session.clear()
     userlog = ""
     
     parametrosURL = {

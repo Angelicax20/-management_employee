@@ -1,10 +1,10 @@
 from flask_wtf import FlaskForm
-from wtforms import TextField, SubmitField, PasswordField, DateField, IntegerField, SelectField, DecimalField
+from wtforms import TextField, SubmitField, PasswordField, DateField, IntegerField, SelectField, DecimalField, StringField
 from wtforms.fields.html5 import EmailField, DateField, IntegerField, TelField, DecimalField
-from wtforms.validators import EqualTo, InputRequired
+from wtforms.validators import EqualTo, InputRequired, Length
 
 class Login(FlaskForm):
-    usu = TextField('Usuario', validators = [InputRequired(message='Indique el usuario')])
+    usu = StringField('Usuario', validators = [InputRequired(message='Indique el usuario')])
     cla = PasswordField('Contraseña', validators = [InputRequired(message='Indique la clave')])
     btn = SubmitField('Ingresar')
 
