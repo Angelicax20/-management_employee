@@ -3,7 +3,7 @@ from flask import Flask, render_template, redirect, session, flash, request
 from markupsafe import escape
 from werkzeug.security import check_password_hash, generate_password_hash
 from db import seleccion, accion
-from dbmysql import seleccion2, accion2
+#from dbmysql import seleccion2, accion2
 from forms import Registro, Login as lg
 import os
 
@@ -69,7 +69,8 @@ def crear_usuario():
                     try:
                         resultadoUpdate = seleccion(sql)
                     except:
-                        resultadoUpdate = seleccion2(sql)    
+                        #resultadoUpdate = seleccion2(sql)
+                        pass    
 
                     parametrosURL['datosUsuario'] = resultadoUpdate
                     parametrosURL['accion'] = 'editar'
@@ -101,8 +102,8 @@ def crear_usuario():
                            
                         res = accion(sql, (numeroDocumento, nombres, apellidos, fechaNacimiento, telefono, email, tipoContrato, salario, fechaTerminoContrato, clave, tipoDoc, fechaIngreso, cargo, tipoUsuario, 'A'))
                     except:
-                        res = accion2(sql, (numeroDocumento, nombres, apellidos, fechaNacimiento, telefono, email, tipoContrato, salario, fechaTerminoContrato, clave, tipoDoc, fechaIngreso, cargo, tipoUsuario, 'A'))
-                        
+                       #res = accion2(sql, (numeroDocumento, nombres, apellidos, fechaNacimiento, telefono, email, tipoContrato, salario, fechaTerminoContrato, clave, tipoDoc, fechaIngreso, cargo, tipoUsuario, 'A'))
+                        pass
                     # Proceso los resultados
                     # linea de prueba    
                     # print(res)
@@ -124,7 +125,8 @@ def crear_usuario():
                     try:
                         res = accion(sql, (numeroDocumento, nombres, apellidos, fechaNacimiento, telefono, email, tipoContrato, fechaTerminoContrato, salario, clave, tipoDoc, fechaIngreso, cargo, tipoUsuario, idUsuario))
                     except:
-                        res = accion2(sql, (numeroDocumento, nombres, apellidos, fechaNacimiento, telefono, email, tipoContrato, fechaTerminoContrato, salario, clave, tipoDoc, fechaIngreso, cargo, tipoUsuario, idUsuario))
+                        #res = accion2(sql, (numeroDocumento, nombres, apellidos, fechaNacimiento, telefono, email, tipoContrato, fechaTerminoContrato, salario, clave, tipoDoc, fechaIngreso, cargo, tipoUsuario, idUsuario))
+                        pass
                     # linea de prueba 
                     #print("idUsuario vale:")
                     #print(idUsuario)
@@ -166,7 +168,8 @@ def gestionar():
                 try:
                     res = accion(sqlUpdate, ('I',idUsuario))
                 except:
-                    res = accion2(sqlUpdate, ('I',idUsuario))
+                    #res = accion2(sqlUpdate, ('I',idUsuario))
+                    pass
                 if res == 0:
                     parametrosURL['estadoUpdate'] = 'delete error'
                 else:
@@ -181,7 +184,8 @@ def gestionar():
                 try:
                     res = accion(sql, (descripcion, puntaje, idUsuario))
                 except:
-                    res = accion2(sql, (descripcion, puntaje, idUsuario))
+                    #res = accion2(sql, (descripcion, puntaje, idUsuario))
+                    pass
 
                 if res == 0:
                     parametrosURL['estadoUpdate'] = 'insert report error'
@@ -193,7 +197,8 @@ def gestionar():
             try:
                 resultado = seleccion(sql)
             except:    
-                resultado = seleccion2(sql)
+                #resultado = seleccion2(sql)
+                pass
         return render_template('gestionar-usuario.html', titulo='Gestionar usuario', usuarios=resultado, parametros = parametrosURL)
 
 @app.route('/empleado/', methods=['GET', 'POST'])
@@ -212,7 +217,8 @@ def empleado():
             try:    
                 res = seleccion(sql)
             except:
-                res = seleccion2(sql)
+                #res = seleccion2(sql)
+                pass
 
             return render_template('empleado.html', titulo='Empleado', datosSesion = datosEmpleado, infoReporte = res)
     elif session['tipoUsuario'] == 'admin':
@@ -255,7 +261,8 @@ def login():
         try:
             res = seleccion(sql)
         except:
-            res = seleccion2(sql)
+            #res = seleccion2(sql)
+            pass
 
         if len(res) == 0:
             parametrosURL['estadoLogin'] = 'usuario no encontrado'
