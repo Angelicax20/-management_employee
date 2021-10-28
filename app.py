@@ -263,6 +263,7 @@ def login():
         sql = f"SELECT *  FROM Usuario WHERE docIdentidad='{userlog}'"
         try:
             res = seleccion(sql)
+            #print(res)
         except:
             #res = seleccion2(sql)
             pass
@@ -279,6 +280,13 @@ def login():
                 session.clear()
                 
                 session['tipoUsuario'] = res[0][13]
+                session['estado'] = res[0][14]
+
+                if  session['estado'] =='I':
+                    session.clear()
+                    parametrosURL['estadoLogin'] = 'usuario no encontrado'
+                    return render_template('login.html', prueba=frm_login, parametros=parametrosURL)
+
 
                 if session['tipoUsuario'] == 'empleado':
                     session['datosEmpleado'] = res
