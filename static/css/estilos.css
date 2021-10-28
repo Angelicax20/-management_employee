@@ -20,7 +20,7 @@ body {
 .menu-lateral {
     background: var(--colorFondo1);
     width: 15%;
-    height: 100vh;
+    /*height: 100vh;*/
     border-right: 1px solid var(--colorFuente1);
     padding: 30px 20px;
 }
@@ -153,7 +153,7 @@ header input:checked~.opciones {
 
 .contenedor footer {
     text-align: center;
-    position: fixed;
+    /* position: fixed;*/
     bottom: 0;
     right: 0;
 }
